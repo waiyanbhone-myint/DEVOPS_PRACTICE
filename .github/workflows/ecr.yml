@@ -1,4 +1,4 @@
-name: Push Docker Image To AWS ECR Using Access Key
+name: Push Docker Image To AWS ECR Using OIDC
 
 on:
   push:
@@ -6,6 +6,10 @@ on:
       - main
     paths:
       - 'Week2/aws-ecr-pipeline/**'
+
+permissions:
+  id-token: write
+  contents: read
 
 env:
   AWS_REGION: us-east-2
@@ -25,12 +29,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials Using Access Key
+      - name: Configure AWS Credentials Using OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::936286918918:role/github-actions-ecr-role
 
       - name: Login To Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
