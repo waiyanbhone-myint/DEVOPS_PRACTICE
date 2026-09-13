@@ -10,7 +10,7 @@ on:
 env:
   AWS_REGION: us-east-2
   ECR_REPOSITORY: learndevopsnow
-  AWS_ACCOUNT_ID: 637423240100 # Replace Your ASW ACCOUNT ID
+  AWS_ACCOUNT_ID: 936286918918 # Replace Your ASW ACCOUNT ID
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
