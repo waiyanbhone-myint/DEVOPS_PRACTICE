@@ -33,6 +33,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::936286918918:role/github-actions-ecr-role
+          aws-region: us-east-2
 
       - name: Login To Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
@@ -48,4 +49,3 @@ jobs:
             -f Dockerfile \
             -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${IMAGE_TAG::7} \
             .
-            
