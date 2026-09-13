@@ -3,7 +3,8 @@ name: Push Docker Image To AWS ECR Using OIDC
 on:
   push:
     branches:
-      - main
+      - dev
+      - uat
     paths:
       - 'Week2/aws-ecr-pipeline/**'
 
@@ -55,3 +56,12 @@ jobs:
             -f Dockerfile \
             -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${IMAGE_TAG::7} \
             .
+
+      - name: Dummy ECS Deploy Stage
+        run: |
+          echo "ECS deploy dummy stage only"
+          echo "Target Stage: ${{ steps.stage.outputs.target_stage }}"
+          echo "Image URI: ${{ steps.image.outputs.image_uri }}"
+          echo "Later ECS lesson will add"
+          echo "aws ecs register-task-definition"
+          echo "aws ecs update-service"
