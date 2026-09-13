@@ -1,6 +1,7 @@
 from flask import Flask
 import os
 
+
 app = Flask(__name__)
 
 APP_NAME = os.getenv("APP_NAME", "Hello Docker World")
