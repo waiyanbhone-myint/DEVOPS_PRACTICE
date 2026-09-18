@@ -15,7 +15,7 @@ permissions:
 env:
   AWS_REGION: us-east-2
   ECR_REPOSITORY: learndevopsnow
-  AWS_ACCOUNT_ID: 936286918918 # Replace Your ASW ACCOUNT ID
+  AWS_ACCOUNT_ID: 936286918918
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
@@ -30,11 +30,23 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Debug OIDC claims
+      - name: Set Target Stage
+        id: stage
         run: |
-          TOKEN_JSON=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com")
-          ID_TOKEN=$(echo "$TOKEN_JSON" | jq -r .value)
-          echo "$ID_TOKEN" | awk -F. '{print $2}' | base64 -d 2>/dev/null | jq -r
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "target_stage=prod" >> $GITHUB_OUTPUT
+          else
+            echo "target_stage=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set Image URL
+        id: image
+        run: |
+          SHORT_SHA="${IMAGE_TAG::7}"
+          TARGET_STAGE="${{ steps.stage.outputs.target_stage }}"
+          IMAGE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$TARGET_STAGE-$SHORT_SHA"
+
+          echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
 
       - name: Configure AWS Credentials Using OIDC
         uses: aws-actions/configure-aws-credentials@v4
