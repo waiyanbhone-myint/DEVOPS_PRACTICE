@@ -8,7 +8,9 @@ on:
     paths:
       - 'Week2/aws-ecr-pipeline/**'
   
-  workflow_dispatch:
+  release:
+    types:
+      - published
 
 permissions:
   id-token: write
