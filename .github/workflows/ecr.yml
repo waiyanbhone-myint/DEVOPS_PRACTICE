@@ -30,7 +30,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./Week2-ECS-Practice/learn-ecs-backend
+        working-directory: ./Week2-ECS-Practice/learn-ecs-frontend
 
     steps:
       - name: Checkout Code
