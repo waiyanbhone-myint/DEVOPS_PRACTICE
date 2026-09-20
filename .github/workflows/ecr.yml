@@ -7,6 +7,8 @@ on:
       - uat
     paths:
       - 'Week2-ECS-Practice/**'
+      
+  workflow_dispatch:
   
   release:
     types:
