@@ -6,7 +6,7 @@ on:
       - dev
       - uat
     paths:
-      - 'Week2/aws-ecr-pipeline/**'
+      - 'Week2-ECS-Practice/**'
   
   release:
     types:
@@ -28,7 +28,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./Week2/aws-ecr-pipeline
+        working-directory: ./Week2-ECS-Practice
 
     steps:
       - name: Checkout Code
@@ -37,7 +37,7 @@ jobs:
       - name: Set Target Stage
         id: stage
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ "${{ github.event_name }}" = "release" ]; then
             echo "target_stage=prod" >> $GITHUB_OUTPUT
           else
             echo "target_stage=${{ github.ref_name }}" >> $GITHUB_OUTPUT
