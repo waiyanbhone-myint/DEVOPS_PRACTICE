@@ -72,7 +72,7 @@ jobs:
             --platform linux/amd64 \
             --push \
             -f Dockerfile \
-            -t {{ steps.image.outputs.image_uri }} \
+            -t ${{ steps.image.outputs.image_uri }} \
             .
 
       - name: Dummy ECS Deploy Stage
