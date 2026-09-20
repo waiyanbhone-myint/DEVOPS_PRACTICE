@@ -37,7 +37,7 @@ jobs:
       - name: Set Target Stage
         id: stage
         run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "target_stage=prod" >> $GITHUB_OUTPUT
           else
             echo "target_stage=${{ github.ref_name }}" >> $GITHUB_OUTPUT
