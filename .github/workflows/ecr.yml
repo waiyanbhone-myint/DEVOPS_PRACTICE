@@ -71,6 +71,7 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64 \
+            --build-arg VITE_API_URL="$VITE_API_URL" \
             --push \
             -f Dockerfile \
             -t ${{ steps.image.outputs.image_uri }} \
