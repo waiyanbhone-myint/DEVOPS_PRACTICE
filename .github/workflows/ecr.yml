@@ -23,6 +23,7 @@ env:
   ECR_REPOSITORY: learndevopsnow
   AWS_ACCOUNT_ID: 936286918918
   IMAGE_TAG: ${{ github.sha }}
+  VITE_API_URL: http://learn-ecs-backend:8000
 
 jobs:
   build-and-push:
@@ -30,7 +31,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./Week2-ECS-Practice/learn-ecs-backend
+        working-directory: ./Week2-ECS-Practice/learn-ecs-frontend
 
     steps:
       - name: Checkout Code
