@@ -51,7 +51,7 @@ jobs:
         run: |
           SHORT_SHA="${IMAGE_TAG::7}"
           TARGET_STAGE="${{ steps.stage.outputs.target_stage }}"
-          IMAGE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$TARGET_STAGE-backend-$SHORT_SHA"
+          IMAGE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$TARGET_STAGE-frontend-$SHORT_SHA"
 
           echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
 
