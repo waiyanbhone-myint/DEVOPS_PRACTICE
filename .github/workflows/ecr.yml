@@ -23,7 +23,7 @@ env:
   ECR_REPOSITORY: learndevopsnow
   AWS_ACCOUNT_ID: 936286918918
   IMAGE_TAG: ${{ github.sha }}
-  VITE_API_URL: ${{ VITE_API_URL }}
+  VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
 jobs:
   build-and-push:
